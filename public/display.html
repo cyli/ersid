@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Changes feed</title>
+    <script language="javascript" type="text/javascript" src="/jquery-1.10.2.min.js"></script>
+    <script language="javascript" type="text/javascript">
+    <!--
+        $(document).ready(function() {
+            function pollChanges() {
+                console.log('Polling.');
+                $.ajax({
+                    url: "../_changes",
+                    success: function(data) {
+                        $('.changes').append('<li><b>' + Date().toString() +
+                                             ':</b> ' + data + '</li>')
+                    },
+                    error: function() {
+                        $('.changes').append('<li><b>' + Date().toString() +
+                                             ':</b> unsuccessful poll </li>')
+                    },
+                    complete: function() {
+                        console.log('Poll complete.  Will poll again.');
+                        pollChanges()
+                    }
+                });
+            }
+
+            console.log('Starting polling.');
+            pollChanges();
+        });
+    //-->
+    </script>
+</head>
+
+<body>
+    <h2> What this is: </h2>
+    <p> Toy demonstration of supporting long polling - essentially, every hit
+        to the changes feed creates a new listener, that gets callbacked when
+        there is a change.  So the call does not return until there is a
+        change, or until timeout (at which time another round of polling can
+        occur). </p>
+    <h2>Changes:</h2>
+    <ul class="changes"></ul>
+</body>
+
+</head>
