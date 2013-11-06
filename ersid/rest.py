@@ -44,6 +44,11 @@ class Service(object):
     def get_changes_feed(self, request):
         d = Deferred()
         self.changes_listeners.append(d)
+
+        # unsubscribe if the browser is closed or the request times out
+        request.notifyFinish().addBoth(
+            lambda _: self.changes_listeners.remove(d))
+
         return d
 
     @app.route('/display.html', branch=True)
