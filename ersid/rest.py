@@ -46,7 +46,7 @@ class Service(object):
         self.changes_listeners.append(d)
 
         # unsubscribe if the browser is closed or the request times out
-        request.notifyFinish().addBoth(
+        request.notifyFinish().addErrback(
             lambda _: self.changes_listeners.remove(d))
 
         return d

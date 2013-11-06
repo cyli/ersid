@@ -8,7 +8,7 @@
             function pollChanges() {
                 console.log('Polling.');
                 $.ajax({
-                    url: "../_changes",
+                    url: "/_changes",
                     success: function(data) {
                         $('.changes').append('<li><b>' + Date().toString() +
                                              ':</b> ' + data + '</li>')
